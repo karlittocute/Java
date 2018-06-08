@@ -1,0 +1,27 @@
+<html>
+<head></head>
+<body>
+
+ <FORM id="FormMyLove" name="FormMyLove" method="GET" action="select_b.php" >
+<SELECT name="SelectMyLove" id="SelectMyLove" >
+<OPTION  VALUE="0">vyberi</OPTION>
+<OPTION SELECTED VALUE="1">abricos</OPTION>
+<OPTION VALUE="2">persic</OPTION>
+<OPTION VALUE="3">sliva</OPTION>
+<OPTION VALUE="7">grusha </OPTION>
+</SELECT>
+</FORM>
+<script>
+var n = document.getElementById("SelectMyLove").options.selectedIndex;
+alert(n);
+var txt = document.getElementById("SelectMyLove").options[n].text;
+var val = document.getElementById("SelectMyLove").options[n].value;
+alert (txt);
+alert (val);
+var objSel = document.getElementById("mySelectId"); 
+alert(objSel);
+var objSel = document.myForm.mySelect;
+alert(objSel);
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Калькулятор</title>
+  <meta charset="utf-8">
+  <meta name="author" content="Kitsela K"> 
+ </head>
+ <body>
+
+  </body>
+  <script>
+
+    var Calculator = function() {
+    	var operand1Int;
+    	var operand2Int;
+      	var actionInt;
+      	
+	    this.getOperand1 = function() {
+          	return operand1Int;
+		}
+        this.getOperand2 = function() {
+          	return operand2Int;
+        }
+        this.getAction = function() {
+            return actionInt;
+        }
+		
+		this.doAction = function() {
+		        var result;
+		          	switch  (actionInt) {
+			    case 1: result = this.addition()
+				break
+			    case 2: result = this.subtraction()
+				break
+			    case 3: result = this.multiplication()
+				break
+			    case 4: result = this.division()
+				break
+				default: result ="Ошибка"
+			};
+			return result;
+	    }
+        this.setOperand1  = function(value) {
+        	operand1Int = value;
+        }
+        this.setOperand2  = function(value) {
+        	operand2Int = value;
+        }
+        this.setAction  = function(value) {
+        	actionInt = value;
+        }
+        this.addition  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+        return  parseInt(operand2Int+operand1Int);
+        }
+      	this.subtraction  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+        return  parseInt(operand1Int-operand2Int);
+        }
+        this.multiplication  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+        return  parseInt(operand1Int*operand2Int);
+        }
+        this.division  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+          if (operand2Int==0){return "деление на 0"} else {return  operand1Int/operand2Int;}
+        }
+    } 
+    var simpleCalc = new Calculator();
+
+	function test(Oper1,Oper2,Action){
+	    simpleCalc.setOperand1(Oper1);
+        simpleCalc.setOperand2(Oper2);
+        simpleCalc.setAction(Action); 
+        return	simpleCalc.doAction()
+	}
+	
+	
+	console.log(test(7,6,1));
+  </script> 
+</html>

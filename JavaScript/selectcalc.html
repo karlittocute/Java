@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Калькулятор</title>
+  <meta charset="utf-8">
+  <meta name="author" content="Kitsela K"> 
+ </head>
+ <body>
+  <h1>Калькулятор</h1>
+   		Действие 
+        <form>
+   			<select id="actionValue" name="action">
+  				<option value="0"> </option>
+   				<option value="1">+</option>
+				<option value="2">-</option>
+				<option value="3">*</option>
+				<option value="4">/</option>
+			</select>
+	    </form>
+		<br><br>
+   <button id="runCalcButton" onClick="calculate()"> Вычислить </button>
+   <p id="result"></p>
+   <script>
+
+var val = 6;
+console.log(val);
+var n = document.getElementById("actionValue").options.selectedIndex;
+console.log(n);
+   </script>
+  </body>
+  </html>
