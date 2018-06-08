@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- подключаем стили Mocha, для отображения результатов -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+  <!-- подключаем библиотеку Mocha -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+  <!-- настраиваем Mocha: предстоит BDD-тестирование -->
+  <script>
+    mocha.setup('bdd');
+  </script>
+
+  <!-- подключаем chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+  <!-- в chai есть много всего, выносим assert в глобальную область -->
+  <script>
+    var assert = chai.assert;
+  </script>
+</head>
+
+<body>
+
+  <script>
+
+    var Calculator = function() {
+    	var operand1Int;
+    	var operand2Int;
+      	var actionInt;
+      	
+	    this.getOperand1 = function() {
+          	return operand1Int;
+		}
+        this.getOperand2 = function() {
+          	return operand2Int;
+        }
+        this.getAction = function() {
+            return actionInt;
+        }
+		
+		this.doAction = function() {
+		        var result;
+		          	switch  (actionInt) {
+			    case '+': result = this.addition()
+				break
+			    case '-': result = this.subtraction()
+				break
+			    case '*': result = this.multiplication()
+				break
+			    case '/': result = this.division()
+				break
+				default: result ="Ошибка"
+			};
+			return result;
+		};
+        this.setOperand1  = function(value) {
+        	operand1Int = value;
+        }
+        this.setOperand2  = function(value) {
+        	operand2Int = value;
+        }
+        this.setAction  = function(value) {
+        	actionInt = value;
+        }
+        this.addition  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+        return  parseInt(operand2Int+operand1Int);
+        }
+      	this.subtraction  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+        return  parseInt(operand1Int-operand2Int);
+        }
+        this.multiplication  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+        return  parseInt(operand1Int*operand2Int);
+        }
+        this.division  = function() {
+         operand2Int=parseInt(operand2Int);
+         operand1Int=parseInt(operand1Int);
+          if (operand2Int==0){return "деление на 0"} else {return  operand1Int/operand2Int;}
+        }
+    } 
+    var simpleCalc = new Calculator();
+
+	function calculate(Oper1,Oper2,Action){
+	    simpleCalc.setOperand1(Oper1);
+        simpleCalc.setOperand2(Oper2);
+        simpleCalc.setAction(Action); 
+        return	simpleCalc.doAction()
+	}
+  </script>
+
+  <!-- в этом скрипте находятся спецификации (specifications, на слэнге "спеки") -->
+  <script>
+
+    describe("Калькулятор (сложение, вычитание, умножение, деление)", function() {
+	  
+      describe ("Сложение (addition)", function() {
+        
+        it("Сложение двух положительных чисел 2 и 3", function() {
+          assert.equal(calculate(2,3, "+"),5);
+        });
+        
+        it("Сложение положительного и отрицательного числа", function() {
+        	assert.equal(calculate(2, -4, "+"), -2);
+        });
+    	it("Сложение положительного и нуля", function() {
+        	assert.equal(calculate(2, 0, "+"), 2);
+        });    
+        
+        it("Сложение двух нулевых значений ", function() {
+        	assert.equal(calculate(0, 0, "+"), 0);
+        });    
+        
+        
+	  });
+      describe ("Вычитание (subtraction)", function() {
+        
+        it("Вычитание двух положительных чисел 2 и -3", function() {
+          assert.equal(calculate(2,3, "-"), -1);
+        });
+        
+        it("Вычитание положительного и отрицательного числа", function() {
+        	assert.equal(calculate(2, -4, "-"), 6);
+        });
+    	it("Вычитание положительного и нуля", function() {
+        	assert.equal(calculate(2, 0, "-"), 2);
+        });    
+        
+        it("Вычитание двух нулевых значений ", function() {
+        	assert.equal(calculate(0, 0, "-"), 0);
+        });    
+      });
+      
+      describe ("Произведение (multiplication)", function() {
+        it("Произведение двух нулевых значений ", function() {
+        	assert.equal(calculate(0, 0, "*"), 0);
+        });    
+        
+        it("Произведение нулевого значения и одного ненулевого значения ", function() {
+        	assert.equal(calculate(0, 5, "*"), 0);
+        });
+        
+        
+	  });
+            describe ("Деление (division)", function() {
+	    it("Деление двух ненулевых значений ", function() {
+        assert.equal(calculate(10, 5, "/"), 2);
+        });  
+        it("Деление двух нулевых значений ", function() {
+        	assert.equal(calculate(0, 0, "/"), 'деление на 0');
+        });    
+        
+        it("Деление нулевого значения и одного ненулевого значения ", function() {
+        	assert.equal(calculate(0, 5, "/"), 0);
+        });
+        it("Деление на ноль ", function() {
+        	assert.equal(calculate(5, 0, "/"), 'деление на 0');
+        });
+		it("Ноль на ноль ", function() {
+        	assert.equal(calculate(0, 0, "/"), 'деление на 0');
+        });
+        
+	  });
+    });
+  </script>
+
+  <!-- в элементе с id="mocha" будут результаты тестов -->
+  <div id="mocha"></div>
+
+  <!-- запустить тесты! -->
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>

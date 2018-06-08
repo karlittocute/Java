@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="author" content="Kitsela K"> 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://кодактор.рф/js/jquery.query-object.js"></script>     
+
+   <body>
+
+  </body>
+  <script>
+    console.clear();
+	var B=[];
+	var A=[];
+	A[1]= $.query.get('a') || "1";
+	A[2]=$.query.get('b') || "7";
+    A[3]=$.query.get('c') || "1";	
+	A[4]=$.query.get('d') || "8";
+	A[5]=$.query.get('e') || "5";
+	A[6]=$.query.get('f') || "1";
+	A[7]=$.query.get('g') || "6";
+	A[8]=$.query.get('h') || "4";
+	A[9]=$.query.get('i') || "1";
+	var a=0;
+	var k=$.query.get('k') || "2";
+    for (var i=0;i<=2;i++) {
+	  B[i]=[];
+	 for (var j=0;j<=2;j++) {
+	 	++a;
+	    B[i][j]=A[a]*k;
+	 }
+	}
+    console.log(JSON.stringify(B));
+	console.log(B);
+	var a=B[0].join(',');
+	var b=B[1].join(',');
+	var c= B[2].join(',');
+    document.title=JSON.stringify(B);
+  </script> 
+</html>
